@@ -41,7 +41,7 @@ var (
 	stationURL     = "https://api.openweathermap.org/data/2.5/station?id=%d"
 	forecast5Base  = "https://api.openweathermap.org/data/2.5/forecast?appid=%s&%s&mode=json&units=%s&lang=%s&cnt=%d"
 	forecast16Base = "https://api.openweathermap.org/data/2.5/forecast/daily?appid=%s&%s&mode=json&units=%s&lang=%s&cnt=%d"
-	historyURL     = "https://api.openweathermap.org/data/2.5/history/%s"
+	historyURL     = "https://history.openweathermap.org/data/2.5/history/city?%s"
 	pollutionURL   = "https://api.openweathermap.org/data/2.5/air_pollution?appid=%s&lat=%s&lon=%s"
 	uvURL          = "https://api.openweathermap.org/data/2.5/"
 	dataPostURL    = "https://openweathermap.org/data/post"
@@ -157,6 +157,7 @@ type Sys struct {
 type Wind struct {
 	Speed float64 `json:"speed"`
 	Deg   float64 `json:"deg"`
+	Gust  float64 `json:"gust"`
 }
 
 // Weather struct holds high-level, basic info on the returned
@@ -185,8 +186,8 @@ type Clouds struct {
 	All int `json:"all"`
 }
 
-// 	return key
-// }
+//		return key
+//	}
 func setKey(key string) (string, error) {
 	if err := ValidAPIKey(key); err != nil {
 		return "", err
